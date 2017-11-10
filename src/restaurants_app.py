@@ -43,6 +43,11 @@ def menuItemEdit(restaurant_id, menu_id):
     return "Menu Item Edit page."
 
 
+@app.route("/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/")
+def menuItemDelete(restaurant_id, menu_id):
+    return "Menu Item Delete page."
+
+
 if __name__ == '__main__':
     app.secret_key = 'dev_secret_key'
     app.debug = True
