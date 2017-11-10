@@ -48,6 +48,22 @@ def menuItemDelete(restaurant_id, menu_id):
     return "Menu Item Delete page."
 
 
+@app.route("/restaurants/JSON/")
+def restaurantsJSON():
+    return "Restaurants JSON response."
+
+
+@app.route("/restaurants/<int:restaurant_id>/JSON/")
+@app.route("/restaurants/<int:restaurant_id>/menu/JSON/")
+def restaurantMenuJSON(restaurant_id):
+    return "Restaurant Menu JSON response."
+
+
+@app.route("/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON/")
+def restaurantMenuItemJSON(restaurant_id, menu_id):
+    return "Restaurant Menu Item JSON response."
+
+
 if __name__ == '__main__':
     app.secret_key = 'dev_secret_key'
     app.debug = True
