@@ -12,6 +12,11 @@ def restaurants():
     return "Main restaurants page."
 
 
+@app.route("/restaurants/new/")
+def restaurantNew():
+    return "Create new restaurant page."
+
+
 @app.route("/restaurants/<int:restaurant_id>/")
 @app.route("/restaurants/<int:restaurant_id>/menu/")
 def restaurantMenu(restaurant_id):
