@@ -23,6 +23,11 @@ def restaurantMenu(restaurant_id):
     return "Restaurant Menu page."
 
 
+@app.route("/restaurants/<int:restaurant_id>/edit/")
+def restaurantEdit(restaurant_id):
+    return "Restaurant Edit page."
+
+
 if __name__ == '__main__':
     app.secret_key = 'dev_secret_key'
     app.debug = True
