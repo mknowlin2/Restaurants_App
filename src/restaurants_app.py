@@ -34,7 +34,7 @@ def restaurantDelete(restaurant_id):
 
 
 @app.route("/restaurants/<int:restaurant_id>/menu/new/")
-def menuItemNew(menu_id):
+def menuItemNew(restaurant_id):
     return "Create a new menu item page."
 
 
