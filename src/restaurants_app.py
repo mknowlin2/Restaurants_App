@@ -11,6 +11,13 @@ app = Flask(__name__)
 def restaurants():
     return "Main restaurants page."
 
+
+@app.route("/restaurants/<int:restaurant_id>/")
+@app.route("/restaurants/<int:restaurant_id>/menu/")
+def restaurantMenu(restaurant_id):
+    return "Restaurant Menu page."
+
+
 if __name__ == '__main__':
     app.secret_key = 'dev_secret_key'
     app.debug = True
