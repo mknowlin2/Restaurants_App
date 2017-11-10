@@ -28,6 +28,11 @@ def restaurantEdit(restaurant_id):
     return "Restaurant Edit page."
 
 
+@app.route("/restaurants/<int:restaurant_id>/delete/")
+def restaurantDelete(restaurant_id):
+    return "Restaurant Delete page."
+
+
 if __name__ == '__main__':
     app.secret_key = 'dev_secret_key'
     app.debug = True
