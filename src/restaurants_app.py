@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #
 # The Restaurants Web application.
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -9,7 +9,14 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/restaurants/")
 def restaurants():
-    return "Main restaurants page."
+    '''Mock Restaurants'''
+    restaurants = [{"name": "Mock Restaurant 1", "id": "1"},
+                   {"name": "Mock Restaurant 2", "id": "2"},
+                   {"name": "Mock Restaurant 3", "id": "3"},
+                   {"name": "Mock Restaurant 4", "id": "4"},
+                   {"name": "Mock Restaurant 5", "id": "5"}]
+
+    return render_template("restaurants.html", restaurants=restaurants)
 
 
 @app.route("/restaurants/new/")
