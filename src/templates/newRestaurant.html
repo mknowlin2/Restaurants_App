@@ -20,8 +20,8 @@
         <a href="{{url_for('restaurants')}}" class="navbar-brand">
           <img id="logo" class="d-inline-block align-top"
                src="/static/img/kanji520.png" alt="Kanji520 Logo">
-          <span class="navbar-text">Restaurants</span>
         </a>
+        <span class="navbar-text">Create a new restaurant</span>
         <a href="{{url_for('restaurants')}}"
            class="btn btn-outline-danger my-2 my-sm-0">Cancel</a>
       </nav>
@@ -30,7 +30,22 @@
           <main id="restaurants">
             <div class="row">
               <div class="col">
-                <h2>Create new restaurant page.</h2>
+                <form action="{{url_for('restaurantNew')}}" method="post">
+                  <div class="row">
+                    <div class="col-3">
+                      <label>Name: </label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" size="30"
+                             name="name" placeholder="Name"/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <input class="btn btn-outline-success" type="submit" value="Create">
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </main>
