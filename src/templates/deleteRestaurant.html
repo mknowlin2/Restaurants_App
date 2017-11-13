@@ -20,20 +20,25 @@
         <a href="{{url_for('restaurants')}}" class="navbar-brand">
           <img id="logo" class="d-inline-block align-top"
                src="/static/img/kanji520.png" alt="Kanji520 Logo">
-          <span class="navbar-text">Restaurants</span>
         </a>
+        <h1 class="navbar-text">Delete Restaurant Confirmation</h1>
         <a href="{{url_for('restaurants')}}"
            class="btn btn-outline-danger my-2 my-sm-0">Cancel</a>
       </nav>
       <div class="row">
         <div class="col">
-          <main id="restaurants">
+          <form action="{{url_for('restaurantDelete', restaurant_id=restaurant_id)}}" method="post">
             <div class="row">
               <div class="col">
-                <h2>Restaurant Delete page.</h2>
+                <p>Are you sure you want to delete <strong> {{restaurant.name}} </strong> from the list.</p>
               </div>
             </div>
-          </main>
+            <div class="row">
+              <div class="col">
+                <input class="btn btn-outline-success" type="submit" value="Delete">
+              </div>
+            </div>
+          </form>
         </div>
       </div>
       <footer class="footer">
