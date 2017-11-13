@@ -28,6 +28,7 @@
       <div class="row">
         <div class="col">
           <main id="restaurants">
+            {% if restaurants|length > 0 %}
             <div class="restaurant">
               {% for restaurant in restaurants %}
               <div class="row">
@@ -49,6 +50,16 @@
               </div>
               {% endfor %}
             </div>
+            {% else %}
+            <div class="empty_restaurant">
+              <div class="row">
+                <div class="col">
+                  <h2>There are no known restaurants</h2>
+                  <p>Please add a restaurant.</p>
+                </div>
+              </div>
+            </div>
+            {% endif %}
           </main>
         </div>
       </div>
