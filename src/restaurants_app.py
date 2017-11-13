@@ -43,7 +43,9 @@ def restaurantEdit(restaurant_id):
     else:
         '''Mock Restaurant'''
         restaurant = {"name": "Mock Restaurant 1", "id": "1"}
-        return render_template("editRestaurant.html", restaurant=restaurant)
+        return render_template("editRestaurant.html",
+                               restaurant_id=restaurant_id,
+                               restaurant=restaurant)
 
 
 @app.route("/restaurants/<int:restaurant_id>/delete/", methods=['GET', 'POST'])
