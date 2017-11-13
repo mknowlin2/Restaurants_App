@@ -9,6 +9,7 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/restaurants/")
 def restaurants():
+    '''TODO: Add Data Access Layer code'''
     '''Mock Restaurants'''
     restaurants = [{"name": "Mock Restaurant 1", "id": "1"},
                    {"name": "Mock Restaurant 2", "id": "2"},
@@ -21,7 +22,7 @@ def restaurants():
 
 @app.route("/restaurants/new/")
 def restaurantNew():
-    return "Create new restaurant page."
+    return render_template("newRestaurant.html")
 
 
 @app.route("/restaurants/<int:restaurant_id>/")
@@ -32,12 +33,12 @@ def restaurantMenu(restaurant_id):
 
 @app.route("/restaurants/<int:restaurant_id>/edit/")
 def restaurantEdit(restaurant_id):
-    return "Restaurant Edit page."
+    return render_template("editRestaurant.html")
 
 
 @app.route("/restaurants/<int:restaurant_id>/delete/")
 def restaurantDelete(restaurant_id):
-    return "Restaurant Delete page."
+    return render_template("deleteRestaurant.html")
 
 
 @app.route("/restaurants/<int:restaurant_id>/menu/new/")
