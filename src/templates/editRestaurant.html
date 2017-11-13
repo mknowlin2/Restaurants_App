@@ -20,17 +20,32 @@
         <a href="{{url_for('restaurants')}}" class="navbar-brand">
           <img id="logo" class="d-inline-block align-top"
                src="/static/img/kanji520.png" alt="Kanji520 Logo">
-          <span class="navbar-text">Restaurants</span>
         </a>
+        <h1 class="navbar-text">Edit Restaurant</h1>
         <a href="{{url_for('restaurants')}}"
            class="btn btn-outline-danger my-2 my-sm-0">Cancel</a>
       </nav>
       <div class="row">
         <div class="col">
-          <main id="restaurants">
+          <main id="restaurant">
             <div class="row">
               <div class="col">
-                <h2>Restaurant Edit page.</h2>
+                <form action="{{url_for('restaurantEdit', restaurant_id=restaurant_id)}}" method="post">
+                  <div class="row">
+                    <div class="col-3">
+                      <label>Name: </label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" size="30"
+                             name="name" placeholder="{{restaurant.name}}"/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <input class="btn btn-outline-success" type="submit" value="Update">
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </main>
