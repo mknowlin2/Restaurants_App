@@ -46,9 +46,17 @@ def restaurantEdit(restaurant_id):
         return render_template("editRestaurant.html", restaurant=restaurant)
 
 
-@app.route("/restaurants/<int:restaurant_id>/delete/")
+@app.route("/restaurants/<int:restaurant_id>/delete/", methods=['GET', 'POST'])
 def restaurantDelete(restaurant_id):
-    return render_template("deleteRestaurant.html")
+    if request.method == 'POST':
+        '''TODO: Add Data Access Layer code'''
+        return redirect(url_for("restaurants"))
+    else:
+        '''Mock Restaurant'''
+        restaurant = {"name": "Mock Restaurant 1", "id": "1"}
+        return render_template("deleteRestaurant.html",
+                               restaurant_id=restaurant_id,
+                               restaurant=restaurant)
 
 
 @app.route("/restaurants/<int:restaurant_id>/menu/new/")
