@@ -35,9 +35,15 @@ def restaurantMenu(restaurant_id):
     return "Restaurant Menu page."
 
 
-@app.route("/restaurants/<int:restaurant_id>/edit/")
+@app.route("/restaurants/<int:restaurant_id>/edit/", methods=['GET', 'POST'])
 def restaurantEdit(restaurant_id):
-    return render_template("editRestaurant.html")
+    if request.method == 'POST':
+        '''TODO: Add Data Access Layer code'''
+        return redirect(url_for("restaurants"))
+    else:
+        '''Mock Restaurant'''
+        restaurant = {"name": "Mock Restaurant 1", "id": "1"}
+        return render_template("editRestaurant.html", restaurant=restaurant)
 
 
 @app.route("/restaurants/<int:restaurant_id>/delete/")
