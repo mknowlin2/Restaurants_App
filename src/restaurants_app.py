@@ -4,7 +4,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 from database.data_access import get_all_restaurants, get_restaurant, \
      add_restaurant, update_restaurant, delete_restaurant, \
-     get_all_menu_items_for_restaurant
+     get_all_menu_items_for_restaurant, get_menu_item, add_menu_item, \
+     update_menu_item, delete_menu_item
 
 app = Flask(__name__)
 
@@ -99,12 +100,11 @@ def menuItemEdit(restaurant_id, menu_id):
            methods=['GET', 'POST'])
 def menuItemDelete(restaurant_id, menu_id):
     if request.method == 'POST':
-        '''TODO: Add Data Access Layer code'''
+        delete_menu_item(menu_id)
         return redirect(url_for("restaurantMenu",
                                 restaurant_id=restaurant_id))
     else:
-        item = {"id":"1", "name": "Mock Entree", "course": "Entree",
-                 "price": "$12.00", "description": "Mock description"}
+        item = get_menu_item(menu_id)
         return render_template("deleteMenuItem.html",
                                restaurant_id=restaurant_id, menu_id=menu_id,
                                item=item)
