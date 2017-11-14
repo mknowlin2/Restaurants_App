@@ -3,7 +3,8 @@
 # The Restaurants Web application.
 from flask import Flask, render_template, request, redirect, url_for
 from database.data_access import get_all_restaurants, get_restaurant, \
-     add_restaurant, update_restaurant, delete_restaurant
+     add_restaurant, update_restaurant, delete_restaurant, \
+     get_all_menu_items_for_restaurant
 
 app = Flask(__name__)
 
@@ -27,13 +28,8 @@ def restaurantNew():
 @app.route("/restaurants/<int:restaurant_id>/")
 @app.route("/restaurants/<int:restaurant_id>/menu/")
 def restaurantMenu(restaurant_id):
-    '''Mock Restaurant'''
-    restaurant = {"name": "Mock Restaurant 1", "id": "1"}
-
-    items = [{"id":"1", "name": "Mock Entree", "course": "Entree", "price": "$12.00", "description": "Mock description"},
-             {"id":"2", "name": "Mock Dessert", "course": "Dessert", "price": "$4.00", "description": "Mock description"},
-             {"id":"3", "name": "Mock Appetizer", "course": "Appetizer", "price": "$4.00", "description": "Mock description"}]
-
+    restaurant = get_restaurant(restaurant_id)
+    items = get_all_menu_items_for_restaurant(restaurant_id)
     return render_template("menu.html", restaurant=restaurant, items=items)
 
 
