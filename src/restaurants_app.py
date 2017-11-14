@@ -2,7 +2,7 @@
 #
 # The Restaurants Web application.
 from flask import Flask, render_template, request, redirect, url_for
-from database.data_access import get_all_restaurants
+from database.data_access import get_all_restaurants, add_restaurant
 
 app = Flask(__name__)
 
@@ -17,7 +17,7 @@ def restaurants():
 @app.route("/restaurants/new/", methods=['GET', 'POST'])
 def restaurantNew():
     if request.method == 'POST':
-        '''TODO: Add Data Access Layer code'''
+        add_restaurant(request.form['name'])
         return redirect(url_for("restaurants"))
     else:
         return render_template("newRestaurant.html")

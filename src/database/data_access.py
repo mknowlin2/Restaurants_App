@@ -14,3 +14,10 @@ def get_all_restaurants():
     '''Retrieve all records from the Restaurant table'''
     restaurants = session.query(Restaurant).all()
     return restaurants
+
+
+def add_restaurant(restaurant_name):
+    '''Insert new restaurant into the Restaurant table'''
+    newRestaurant = Restaurant(name=restaurant_name)
+    session.add(newRestaurant)
+    session.commit()
