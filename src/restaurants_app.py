@@ -2,6 +2,7 @@
 #
 # The Restaurants Web application.
 from flask import Flask, render_template, request, redirect, url_for
+from database.data_access import get_all_restaurants
 
 app = Flask(__name__)
 
@@ -9,14 +10,7 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/restaurants/")
 def restaurants():
-    '''TODO: Add Data Access Layer code'''
-    '''Mock Restaurants'''
-    restaurants = [{"name": "Mock Restaurant 1", "id": "1"},
-                   {"name": "Mock Restaurant 2", "id": "2"},
-                   {"name": "Mock Restaurant 3", "id": "3"},
-                   {"name": "Mock Restaurant 4", "id": "4"},
-                   {"name": "Mock Restaurant 5", "id": "5"}]
-
+    restaurants = get_all_restaurants()
     return render_template("restaurants.html", restaurants=restaurants)
 
 
