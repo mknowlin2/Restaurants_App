@@ -77,3 +77,10 @@ def update_menu_item(item_id, item_name, item_course,
 
     session.add(item)
     session.commit()
+
+
+def delete_menu_item(menu_id):
+    '''Delete record in the Menu table'''
+    item = session.query(MenuItem).filter_by(id=menu_id).one()
+    session.delete(item)
+    session.commit()
