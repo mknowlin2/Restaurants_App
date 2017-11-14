@@ -48,3 +48,9 @@ def get_all_menu_items_for_restaurant(rest_id):
     '''Retrieve all menu items for given restaurant_id from MenuItem'''
     items = session.query(MenuItem).filter_by(restaurant_id=rest_id)
     return items
+
+
+def get_menu_item(item_id):
+    '''Retrieve all records from the Restaurant table'''
+    item = session.query(MenuItem).filter_by(id=item_id).one()
+    return item
