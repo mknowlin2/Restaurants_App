@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database.db_setup import Base, Restaurant
+from database.db_setup import Base, Restaurant, MenuItem
 
 '''Set up database engine and database session '''
 engine = create_engine('sqlite:///restaurantmenu.db')
@@ -46,7 +46,7 @@ def delete_restaurant(restaurant_id):
 
 def get_all_menu_items_for_restaurant(rest_id):
     '''Retrieve all menu items for given restaurant_id from MenuItem'''
-    items = session.query(MenuItem).filter_by(restaurant_id=rest_id)
+    items = session.query(MenuItem).filter_by(restaurant_id=rest_id).all()
     return items
 
 
