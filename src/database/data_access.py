@@ -42,3 +42,9 @@ def delete_restaurant(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     session.delete(restaurant)
     session.commit()
+
+
+def get_all_menu_items_for_restaurant(rest_id):
+    '''Retrieve all menu items for given restaurant_id from MenuItem'''
+    items = session.query(MenuItem).filter_by(restaurant_id=rest_id)
+    return items
