@@ -32,7 +32,14 @@ def restaurantNew():
 @app.route("/restaurants/<int:restaurant_id>/")
 @app.route("/restaurants/<int:restaurant_id>/menu/")
 def restaurantMenu(restaurant_id):
-    return "Restaurant Menu page."
+    '''Mock Restaurant'''
+    restaurant = {"name": "Mock Restaurant 1", "id": "1"}
+
+    items = [{"id":"1", "name": "Mock Entree", "course": "Entree", "price": "$12.00", "description": "Mock description"},
+             {"id":"2", "name": "Mock Dessert", "course": "Dessert", "price": "$4.00", "description": "Mock description"},
+             {"id":"3", "name": "Mock Appetizer", "course": "Appetizer", "price": "$4.00", "description": "Mock description"}]
+
+    return render_template("menu.html", restaurant=restaurant, items=items)
 
 
 @app.route("/restaurants/<int:restaurant_id>/edit/", methods=['GET', 'POST'])
