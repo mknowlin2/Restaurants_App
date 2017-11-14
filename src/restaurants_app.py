@@ -2,7 +2,8 @@
 #
 # The Restaurants Web application.
 from flask import Flask, render_template, request, redirect, url_for
-from database.data_access import get_all_restaurants, add_restaurant
+from database.data_access import get_all_restaurants, get_restaurant, \
+     add_restaurant, update_restaurant
 
 app = Flask(__name__)
 
@@ -39,11 +40,11 @@ def restaurantMenu(restaurant_id):
 @app.route("/restaurants/<int:restaurant_id>/edit/", methods=['GET', 'POST'])
 def restaurantEdit(restaurant_id):
     if request.method == 'POST':
-        '''TODO: Add Data Access Layer code'''
+        update_restaurant(restaurant_id, request.form['name'])
         return redirect(url_for("restaurants"))
     else:
         '''Mock Restaurant'''
-        restaurant = {"name": "Mock Restaurant 1", "id": "1"}
+        restaurant = get_restaurant(restaurant_id)
         return render_template("editRestaurant.html",
                                restaurant_id=restaurant_id,
                                restaurant=restaurant)
