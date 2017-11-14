@@ -22,7 +22,7 @@
                src="/static/img/kanji520.png" alt="Kanji520 Logo">
         </a>
         <h1 class="navbar-text">{{restaurant.name}} Menu</h1>
-        <a href="{{url_for('menuItemNew')}}"
+        <a href="{{url_for('menuItemNew', restaurant_id=restaurant.id)}}"
            class="btn btn-outline-success my-2 my-sm-0">Add Menu Item</a>
       </nav>
       <div class="row">
@@ -32,13 +32,13 @@
             <div class="menu_item">
               {% for item in items %}
               <div class="row">
-                <div class="col-sm-4 col-lg-6 col-xl-8">
+                <div class="col">
                   {{item.name}}
                 </div>
-                <div class="col-sm-4 col-lg-6 col-xl-8">
+                <div class="col">
                   {{item.course}}
                 </div>
-                <div class="col-sm-4 col-lg-6 col-xl-8">
+                <div class="col">
                   {{item.price}}
                 </div>
               </div>
@@ -48,14 +48,12 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-4 col-lg-6 col-xl-8">
-                </div>
                 <div class="col text-center">
-                  <a href="{{url_for('restaurantEdit', restaurant_id=restaurant.id)}}"
+                  <a href="{{url_for('menuItemEdit', restaurant_id=restaurant.id, menu_id=item.id)}}"
                      class="btn btn-outline-primary">Edit</a>
                 </div>
                 <div class="col text-center">
-                  <a href="{{url_for('restaurantDelete', restaurant_id=restaurant.id)}}"
+                  <a href="{{url_for('menuItemDelete', restaurant_id=restaurant.id, menu_id=item.id)}}"
                      class="btn btn-outline-danger">Delete</a>
                 </div>
               </div>
