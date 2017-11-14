@@ -54,3 +54,13 @@ def get_menu_item(item_id):
     '''Retrieve all records from the Restaurant table'''
     item = session.query(MenuItem).filter_by(id=item_id).one()
     return item
+
+
+def add_menu_item(restaurant_id, item_name, item_course,
+                  item_price, item_desc):
+    '''Insert record into the Menu table'''
+    newItem = MenuItem(name=item_name, description=item_desc, \
+                           course=item_course, price=item_price, \
+                           restaurant_id=restaurant_id)
+    session.add(newItem)
+    session.commit()
