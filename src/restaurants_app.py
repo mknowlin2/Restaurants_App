@@ -90,9 +90,17 @@ def menuItemEdit(restaurant_id, menu_id):
                                restaurant_id=restaurant_id, item=item)
 
 
-@app.route("/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/")
+@app.route("/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/",
+           methods=['GET', 'POST'])
 def menuItemDelete(restaurant_id, menu_id):
-    return "Menu Item Delete page."
+    if request.method == 'POST':
+        '''TODO: Add Data Access Layer code'''
+        return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
+    else:
+        item = {"id":"1", "name": "Mock Entree", "course": "Entree",
+                 "price": "$12.00", "description": "Mock description"}
+        return render_template("deleteMenuItem.html",
+                               restaurant_id=restaurant_id, menu_id=menu_id, item=item)
 
 
 @app.route("/restaurants/JSON/")
