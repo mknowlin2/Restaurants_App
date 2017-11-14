@@ -75,13 +75,22 @@ def menuItemNew(restaurant_id):
 @app.route("/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/",
            methods=['GET', 'POST'])
 def menuItemEdit(restaurant_id, menu_id):
+    item = get_menu_item(menu_id)
+
     if request.method == 'POST':
-        '''TODO: Add Data Access Layer code'''
+        if request.form['name']:
+            item.name = request.form['name']
+        if request.form['course']:
+            item.course = request.form['course']
+        if request.form['price']:
+            item.price = request.form['price']
+        if request.form['description']:
+            item.description = request.form['description']
+        update_menu_item(menu_id, item.name, item.course, item.price,
+                         item.description)
         return redirect(url_for("restaurantMenu",
                                 restaurant_id=restaurant_id))
     else:
-        item = {"id":"1", "name": "Mock Entree", "course": "Entree",
-                 "price": "$12.00", "description": "Mock description"}
         return render_template("editMenuItem.html",
                                restaurant_id=restaurant_id, item=item)
 
