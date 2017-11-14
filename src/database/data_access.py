@@ -35,3 +35,10 @@ def update_restaurant(restaurant_id, new_name):
     restaurant.name = new_name
     session.add(restaurant)
     session.commit()
+
+
+def delete_restaurant(restaurant_id):
+    '''Delete the restaurant from the Restaurant table'''
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    session.delete(restaurant)
+    session.commit()
