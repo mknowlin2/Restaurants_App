@@ -68,9 +68,13 @@ def restaurantDelete(restaurant_id):
                                restaurant=restaurant)
 
 
-@app.route("/restaurants/<int:restaurant_id>/menu/new/")
+@app.route("/restaurants/<int:restaurant_id>/menu/new/", methods=['GET', 'POST'])
 def menuItemNew(restaurant_id):
-    return "Create a new menu item page."
+    if request.method == 'POST':
+        '''TODO: Add Data Access Layer code'''
+        return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
+    else:
+        return render_template("newMenuItem.html", restaurant_id=restaurant_id)
 
 
 @app.route("/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/")
