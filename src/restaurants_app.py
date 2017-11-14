@@ -45,7 +45,8 @@ def restaurantEdit(restaurant_id):
                                restaurant=restaurant)
 
 
-@app.route("/restaurants/<int:restaurant_id>/delete/", methods=['GET', 'POST'])
+@app.route("/restaurants/<int:restaurant_id>/delete/",
+           methods=['GET', 'POST'])
 def restaurantDelete(restaurant_id):
     if request.method == 'POST':
         delete_restaurant(restaurant_id)
@@ -57,13 +58,18 @@ def restaurantDelete(restaurant_id):
                                restaurant=restaurant)
 
 
-@app.route("/restaurants/<int:restaurant_id>/menu/new/", methods=['GET', 'POST'])
+@app.route("/restaurants/<int:restaurant_id>/menu/new/",
+           methods=['GET', 'POST'])
 def menuItemNew(restaurant_id):
     if request.method == 'POST':
-        '''TODO: Add Data Access Layer code'''
-        return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
+        add_menu_item(restaurant_id, request.form['name'],
+                      request.form['course'], request.form['price'],
+                      request.form['description'])
+        return redirect(url_for("restaurantMenu",
+                                restaurant_id=restaurant_id))
     else:
-        return render_template("newMenuItem.html", restaurant_id=restaurant_id)
+        return render_template("newMenuItem.html",
+                               restaurant_id=restaurant_id)
 
 
 @app.route("/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/",
@@ -71,7 +77,8 @@ def menuItemNew(restaurant_id):
 def menuItemEdit(restaurant_id, menu_id):
     if request.method == 'POST':
         '''TODO: Add Data Access Layer code'''
-        return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
+        return redirect(url_for("restaurantMenu",
+                                restaurant_id=restaurant_id))
     else:
         item = {"id":"1", "name": "Mock Entree", "course": "Entree",
                  "price": "$12.00", "description": "Mock description"}
@@ -84,12 +91,14 @@ def menuItemEdit(restaurant_id, menu_id):
 def menuItemDelete(restaurant_id, menu_id):
     if request.method == 'POST':
         '''TODO: Add Data Access Layer code'''
-        return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
+        return redirect(url_for("restaurantMenu",
+                                restaurant_id=restaurant_id))
     else:
         item = {"id":"1", "name": "Mock Entree", "course": "Entree",
                  "price": "$12.00", "description": "Mock description"}
         return render_template("deleteMenuItem.html",
-                               restaurant_id=restaurant_id, menu_id=menu_id, item=item)
+                               restaurant_id=restaurant_id, menu_id=menu_id,
+                               item=item)
 
 
 @app.route("/restaurants/JSON/")
