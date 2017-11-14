@@ -64,3 +64,16 @@ def add_menu_item(restaurant_id, item_name, item_course,
                            restaurant_id=restaurant_id)
     session.add(newItem)
     session.commit()
+
+
+def update_menu_item(item_id, item_name, item_course,
+                  item_price, item_desc):
+    '''Update record in the Menu table'''
+    item = session.query(MenuItem).filter_by(id=item_id).one()
+    item.name = item_name
+    item.description = item_desc
+    item.course = item_course
+    item.price = item_price
+
+    session.add(item)
+    session.commit()
