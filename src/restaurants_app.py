@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 #
 # The Restaurants Web application.
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, \
+     jsonify
 from database.data_access import get_all_restaurants, get_restaurant, \
      add_restaurant, update_restaurant, delete_restaurant, \
      get_all_menu_items_for_restaurant, get_menu_item, add_menu_item, \
@@ -112,18 +113,25 @@ def menuItemDelete(restaurant_id, menu_id):
 
 @app.route("/restaurants/JSON/")
 def restaurantsJSON():
-    return "Restaurants JSON response."
+    # Retrieve data for the restaurants
+    restaurants = get_all_restaurants()
+    return jsonify(Restaurant=[restaurant.serialize
+                               for restaurant in restaurants])
 
 
 @app.route("/restaurants/<int:restaurant_id>/JSON/")
 @app.route("/restaurants/<int:restaurant_id>/menu/JSON/")
 def restaurantMenuJSON(restaurant_id):
-    return "Restaurant Menu JSON response."
+    # Retrieve data for the restaurant with id = restaurant_id
+    items = get_all_menu_items_for_restaurant(restaurant_id)
+    return jsonify(MenuItem=[item.serialize for item in items])
 
 
 @app.route("/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON/")
 def restaurantMenuItemJSON(restaurant_id, menu_id):
-    return "Restaurant Menu Item JSON response."
+    # Retrieve data for menu item with restaurant_id and menu_id
+    item = get_menu_item(menu_id)
+    return jsonify(MenuItem=[item.serialize])
 
 
 if __name__ == '__main__':
