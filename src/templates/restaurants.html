@@ -25,6 +25,19 @@
         <a href="{{url_for('restaurantNew')}}"
            class="btn btn-outline-success my-2 my-sm-0">Add Restaurant</a>
       </nav>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class="flash">
+        {% for message in messages %}
+        <div class="row">
+          <div class="col">
+            <li><strong>{{message}}</strong></li>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% endwith %}
       <div class="row">
         <div class="col">
           <main id="restaurants">

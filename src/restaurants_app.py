@@ -2,7 +2,7 @@
 #
 # The Restaurants Web application.
 from flask import Flask, render_template, request, redirect, url_for, \
-     jsonify
+     jsonify, flash
 from database.data_access import get_all_restaurants, get_restaurant, \
      add_restaurant, update_restaurant, delete_restaurant, \
      get_all_menu_items_for_restaurant, get_menu_item, add_menu_item, \
@@ -22,6 +22,7 @@ def restaurants():
 def restaurantNew():
     if request.method == 'POST':
         add_restaurant(request.form['name'])
+        flash("New restaurant was created!")
         return redirect(url_for("restaurants"))
     else:
         return render_template("newRestaurant.html")
@@ -39,6 +40,7 @@ def restaurantMenu(restaurant_id):
 def restaurantEdit(restaurant_id):
     if request.method == 'POST':
         update_restaurant(restaurant_id, request.form['name'])
+        flash("Restaurant name was updated to {}".format(request.form['name']))
         return redirect(url_for("restaurants"))
     else:
         restaurant = get_restaurant(restaurant_id)
@@ -52,6 +54,7 @@ def restaurantEdit(restaurant_id):
 def restaurantDelete(restaurant_id):
     if request.method == 'POST':
         delete_restaurant(restaurant_id)
+        flash("Restaurant with id ({}) was deleted.".format(restaurant_id))
         return redirect(url_for("restaurants"))
     else:
         restaurant = get_restaurant(restaurant_id)
@@ -67,6 +70,7 @@ def menuItemNew(restaurant_id):
         add_menu_item(restaurant_id, request.form['name'],
                       request.form['course'], request.form['price'],
                       request.form['description'])
+        flash("A new menu item was added to the menu.")
         return redirect(url_for("restaurantMenu",
                                 restaurant_id=restaurant_id))
     else:
@@ -90,6 +94,7 @@ def menuItemEdit(restaurant_id, menu_id):
             item.description = request.form['description']
         update_menu_item(menu_id, item.name, item.course, item.price,
                          item.description)
+        flash("Menu id ({}) was updated.".format(menu_id))
         return redirect(url_for("restaurantMenu",
                                 restaurant_id=restaurant_id))
     else:
@@ -102,6 +107,7 @@ def menuItemEdit(restaurant_id, menu_id):
 def menuItemDelete(restaurant_id, menu_id):
     if request.method == 'POST':
         delete_menu_item(menu_id)
+        flash("Menu item with id ({}) was deleted.".format(menu_id))
         return redirect(url_for("restaurantMenu",
                                 restaurant_id=restaurant_id))
     else:
